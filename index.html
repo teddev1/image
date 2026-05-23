@@ -1,0 +1,109 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Recognition</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+
+  <body>
+    <nav>
+      <h1>🧠Image Recognition</h1>
+
+      <ul>
+        <a href="{% url 'index' %}" class="active"
+          ><i class="fas fa-home"></i>Home</a
+        >
+        <a href="{% url 'about' %}"><i class="fas fa-info"></i>About</a>
+        <a href="{% url 'contact' %}"><i class="fas fa-phone"></i>Contact</a>
+      </ul>
+    </nav>
+
+    <div class="container">
+      <h1><b>🧠 Smart</b> Image Recognition</h1>
+      <p class="subtitle">Upload an image and let AI detect what's inside</p>
+
+      <form action="/upload/" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <i class="fas fa-arrow-up"></i> Upload Image
+        <p class="choose">Choose an image file or drag & drop it here</p>
+        <div class="grid">
+          <!-- Upload Section -->
+          <div class="upload-box">
+            <!-- Preview Section -->
+            <div class="preview-box">
+              <p>Image Preview <i class="fas fa-cloud-upload"></i></p>
+              <img id="preview" />
+            </div>
+
+            <p>Drag & drop or choose an image</p>
+            <input type="file" name="image" onchange="previewImage(event)" />
+            <button type="submit">
+              <i class="fas fa-magnifying-glass"></i>Analyze Image
+            </button>
+          </div>
+
+          <!-- Preview Section -->
+
+          <div class="result-box">
+            <p>Result</p>
+
+            {% if uploaded_image %}
+
+            <img src="{{ uploaded_image.image.url }}" alt="">
+            {% endif %}
+
+
+            <div class="result">
+       {% if result %}
+
+<h3>Prediction: {{ result }}</h3>
+
+<p>
+    Confidence:
+    {{ confidence|floatformat:2 }}
+</p>
+
+<img src="{{ uploaded_image.image.url }}" width="250">
+
+{% endif %}
+
+        <div class="confidence-bar">
+          <div class="confidence-fill"></div>
+
+
+             
+          </div>
+        </div>
+      </form>
+
+      
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>2026&copy; Image Recognition. All right reserved.</p>
+    </footer>
+
+    <script>
+      function previewImage(event) {
+        const preview = document.getElementById("preview");
+        preview.src = URL.createObjectURL(event.target.files[0]);
+      }
+
+       
+   
+    </script>
+  </body>
+</html>

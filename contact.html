@@ -1,0 +1,155 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact-Image Recognition</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href=" {% static 'css/contact.css' %}"/>
+  </head>
+
+  <body>
+    <nav>
+      <h1>🧠Image Recognition</h1>
+
+      <ul>
+        <a href="{% url 'index' %}" ><i class="fas fa-home"></i>Home</a>
+        <a href="{% url 'about' %}"><i class="fas fa-info"></i>About</a>
+        <a href="{% url 'contact' %}" class="active"><i class="fas fa-phone"></i>Contact</a>
+      </ul>
+    </nav>
+
+    <h5>Contact Us</h5>
+    <h1>Get In Touch</h1>
+    <p>
+      Have question about our image recognitionsystem? We'd love to hear from
+      you.
+    </p>
+
+    <div class="container">
+      <div class="contact-form">
+        <h3>Send Us a Message</h3>
+        <form method="POST" onsubmit="showMessage(event)">
+
+          {% csrf_token %}
+
+          <div class="input">
+            <i class="fas fa-user" id="user"></i>
+            <input type="text" name="username" placeholder="Full Name" required />
+
+            <i class="fas fa-envelope" id="envelope"></i>
+            <input
+              type="email"
+              name="email"
+              placeholder="Email Address"
+              required
+            />
+          </div>
+
+          <div class="subject">
+            <i class="fas fa-tag"></i>
+            <input
+              type="text"
+              name="subject"
+              placeholder="Subject (Optional)"
+            />
+          </div>
+
+          <div class="textarea">
+            <i class="fas fa-message"></i>
+            <textarea
+              name="message"
+              placeholder="Your Message"
+              required
+            ></textarea>
+          </div>
+
+          <button type="submit">Send Message</button>
+
+
+          <div class="popup" id="popup">
+            <div class="popup-content">
+            <h1>Thank you</h1>
+            <p>your submission have been recieved successfully</p>
+            <button onclick="closePopup()">OK</button>
+          </div>
+          </div>
+           
+
+        </form>
+      </div>
+
+      <div class="contact-info">
+        <h3>Contact Information</h3>
+
+        <div class="contact">
+          <button>
+            <i class="fas fa-envelope"></i>
+          </button>
+
+          <div>
+            <h3>Email</h3>
+            <p>imagerecovery@gmail.com</p>
+          </div>
+        </div>
+
+        <div class="contact">
+          <button>
+            <i class="fas fa-phone"></i>
+          </button>
+
+          <div>
+            <h3>Phone</h3>
+            <p>0908354836</p>
+          </div>
+        </div>
+
+        <div class="contact">
+          <button>
+            <i class="fas fa-location-dot"></i>
+          </button>
+
+          <div>
+            <h3>Location</h3>
+            <p>Ekpoma Nigeria</p>
+          </div>
+        </div>
+
+        <div class="contact">
+          <button>
+            <i class="fas fa-clock"></i>
+          </button>
+
+        
+
+          <div>
+            <h3>Response Time</h3>
+            <p>We usually respond within 24 hours</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>© 2026 Image Recognition. All rights reserved.</footer>
+
+
+ <script>
+function showPopup(event){
+    event.preventDefault();
+    document.getElementById("popup").style.display = "flex";
+}
+
+function closePopup(){
+    document.getElementById("popup").style.display = "none";
+}
+</script>
+
+  </body>
+</html>
